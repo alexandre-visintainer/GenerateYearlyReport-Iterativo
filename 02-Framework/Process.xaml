@@ -94,7 +94,7 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1119.2,1776" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1119.2,1982.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="WorkItemUrl" />
       <Variable x:TypeArguments="x:String" Name="ClientId" />
@@ -181,12 +181,18 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_MergedFolderPath">C:\Users\Colaborador\Documents\UiPath\GenerateYearlyReport-Iterativo\01-Data\Output</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UploadYearlyReport - Invoke Workflow File (03-Applications\Edge\UploadYearlyReport.xaml)" sap:VirtualizedContainerService.HintSize="433.6,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="03-Applications\Edge\UploadYearlyReport.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UploadYearlyReport - Invoke Workflow File (03-Applications\Edge\UploadYearlyReport.xaml)" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="03-Applications\Edge\UploadYearlyReport.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_TaxId">[TaxId]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_year">[year]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_mergedReportPath" />
         <OutArgument x:TypeArguments="x:String" x:Key="out_ConfirmationId">[confirmationId]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateWorkItem - Invoke Workflow File (03-Applications\Edge\UpdateWorkItem.xaml)" sap:VirtualizedContainerService.HintSize="433.6,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="03-Applications\Edge\UpdateWorkItem.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_workItemUrl">[WorkItemUrl]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_">[confirmationId]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>

@@ -111,7 +111,7 @@
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="InitializeEdge" sap:VirtualizedContainerService.HintSize="1119.2,2836" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="InitializeEdge" sap:VirtualizedContainerService.HintSize="1119.2,3042.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:BusinessRuleException" Name="businessExcept" />
     </Sequence.Variables>
@@ -120,10 +120,10 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:RetryScope sap2010:Annotation.AnnotationText="Scope to retry initialization attempt for an individual application in case of exceptions.&#xA;" DisplayName="Retry Scope - Init Application Edge" sap:VirtualizedContainerService.HintSize="529.6,2452.8" sap2010:WorkflowViewState.IdRef="RetryScope_9" NumberOfRetries="[in_maxRetryNumber]">
+    <ui:RetryScope sap2010:Annotation.AnnotationText="Scope to retry initialization attempt for an individual application in case of exceptions.&#xA;" DisplayName="Retry Scope - Init Application Edge" sap:VirtualizedContainerService.HintSize="529.6,2659.2" sap2010:WorkflowViewState.IdRef="RetryScope_9" NumberOfRetries="[in_maxRetryNumber]">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <TryCatch sap2010:Annotation.AnnotationText="If any exception occur during an attempt to initialize an application, take screenshot before closing it and rethrow exception to retry initialization (if limit has not been reached)" DisplayName="T/C - Init Application Edge" sap:VirtualizedContainerService.HintSize="468.8,2200.8" sap2010:WorkflowViewState.IdRef="TryCatch_9">
+          <TryCatch sap2010:Annotation.AnnotationText="If any exception occur during an attempt to initialize an application, take screenshot before closing it and rethrow exception to retry initialization (if limit has not been reached)" DisplayName="T/C - Init Application Edge" sap:VirtualizedContainerService.HintSize="468.8,2407.2" sap2010:WorkflowViewState.IdRef="TryCatch_9">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -160,7 +160,7 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Catch Init Exception - Edge" sap:VirtualizedContainerService.HintSize="467.2,994.4" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                  <Sequence DisplayName="Catch Init Exception - Edge" sap:VirtualizedContainerService.HintSize="467.2,1200.8" sap2010:WorkflowViewState.IdRef="Sequence_26">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="screenshotPath" />
                     </Sequence.Variables>
@@ -226,6 +226,11 @@
                       </Assign.Value>
                     </Assign>
                     <ui:Comment DisplayName="Comment - CloseOrKillApp" sap:VirtualizedContainerService.HintSize="433.6,126.4" sap2010:WorkflowViewState.IdRef="Comment_5" Text="// Add a CloseOrKillAppGeneric.xaml workflow if necessary at this point to retry opening the application." />
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="CloseOrKillEdge - Invoke Workflow File (03-Applications\Edge\CloseOrKillEdge.xaml)" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="03-Applications\Edge\CloseOrKillEdge.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_applicationName">msedge.exe</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
                     <Rethrow DisplayName="Rethrow - app A" sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="Rethrow_3" />
                   </Sequence>
                 </ActivityAction>
