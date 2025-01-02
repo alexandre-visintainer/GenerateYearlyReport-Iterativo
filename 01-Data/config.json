@@ -1,7 +1,7 @@
 ﻿{
     "configurationInfos":{
-        "processQueueName":"ProcessQueueNameDev",
-        "processQueueFolder":"ProcessQueueFolderDev",
+        "processQueueName":"GenerateYearlyReport",
+        "processQueueFolder":"Shared",
         "maxRetryNumberInitApplications":3,
         "maxRetryNumberProcess":2,
         "maxConsecutiveApplicationExceptions":3,
@@ -9,6 +9,9 @@
         "localBucketDir":"",
         "exScreenshotsFolderPath":"",
         "businessProcessName":"",
+		"applicationUrl":"https://acme-test.uipath.com/login",
+		"downloadFolder":"C:/Users/Colaborador/Downloads",
+		"worksFolder":"C:/Users/Colaborador/Documents/UiPath/GenerateYearlyReport-Iterativo/01-Data/Output",
         "assets":{
             "example1":{
                 "name":"ExampleAsset1",
@@ -20,9 +23,9 @@
             }
         },
         "credentials":{
-            "example3":{
-                "name":"ExampleCredential1",
-                "orchestratorFolder":"Folder3/Subfolder2"
+            "Acme1Credentials":{
+                "name":"Acme1Credentials",
+                "orchestratorFolder":"Shared"
             }
         }
     }

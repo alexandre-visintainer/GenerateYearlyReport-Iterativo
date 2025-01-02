@@ -46,10 +46,11 @@
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="52">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="104">
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
@@ -101,9 +102,15 @@
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get Next Transaction Item" sap:VirtualizedContainerService.HintSize="724,3491" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get Next Transaction Item" sap:VirtualizedContainerService.HintSize="1119.2,4010.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="isDuplicateReference" />
       <Variable x:TypeArguments="x:String" Name="queueItemReference" />
@@ -113,23 +120,24 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If sap2010:Annotation.AnnotationText="Condition to get the next item!&#xA;&#xA;in_transactionNumber &lt;= io_dtTransactions.Rows.Count" Condition="[in_transactionNumber &lt;= io_dtTransactions.Rows.Count]" DisplayName="If Transaction Number is within Transaction Data Limits" sap:VirtualizedContainerService.HintSize="662,2996" sap2010:WorkflowViewState.IdRef="If_2">
+    <If sap2010:Annotation.AnnotationText="Condition to get the next item!&#xA;&#xA;in_transactionNumber &lt;= io_dtTransactions.Rows.Count" Condition="[in_transactionNumber &lt;= io_dtTransactions.Rows.Count]" DisplayName="If Transaction Number is within Transaction Data Limits" sap:VirtualizedContainerService.HintSize="662.4,3643.2" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Set queue item for next transaction" sap:VirtualizedContainerService.HintSize="628,2757" sap2010:WorkflowViewState.IdRef="Sequence_9">
+        <Sequence DisplayName="Set queue item for next transaction" sap:VirtualizedContainerService.HintSize="537.6,3340.8" sap2010:WorkflowViewState.IdRef="Sequence_9">
           <Sequence.Variables>
             <Variable x:TypeArguments="sd:DataRow" Name="rowTransaction" />
+            <Variable x:TypeArguments="x:String" Name="transactionId" />
           </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign DisplayName="Assign rowTransaction" sap:VirtualizedContainerService.HintSize="586,82" sap2010:WorkflowViewState.IdRef="Assign_17">
+          <Assign DisplayName="Assign rowTransaction" sap:VirtualizedContainerService.HintSize="504,113.6" sap2010:WorkflowViewState.IdRef="Assign_17">
             <Assign.To>
               <OutArgument x:TypeArguments="sd:DataRow">[rowTransaction]</OutArgument>
             </Assign.To>
@@ -137,7 +145,7 @@
               <InArgument x:TypeArguments="sd:DataRow">[io_dtTransactions(in_transactionNumber -1)]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign sap2010:Annotation.AnnotationText="This string must be composed of a set of data that forms an unique key for this item.&#xA;&#xA;The complete reference of the queue item is composed of this string and a retry number, such as:&#xA;&#xA;&quot;{{queueItemReference}} | Retry: {{retryNumber}}&quot; &#xA;&#xA;This is importante to ensure that no transaction is executed more than once in unexpected situations." DisplayName="Assign queueItemReference" sap:VirtualizedContainerService.HintSize="586,244" sap2010:WorkflowViewState.IdRef="Assign_14">
+          <Assign sap2010:Annotation.AnnotationText="This string must be composed of a set of data that forms an unique key for this item.&#xA;&#xA;The complete reference of the queue item is composed of this string and a retry number, such as:&#xA;&#xA;&quot;{{queueItemReference}} | Retry: {{retryNumber}}&quot; &#xA;&#xA;This is importante to ensure that no transaction is executed more than once in unexpected situations." DisplayName="Assign queueItemReference" sap:VirtualizedContainerService.HintSize="504,285.6" sap2010:WorkflowViewState.IdRef="Assign_14">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[queueItemReference]</OutArgument>
             </Assign.To>
@@ -150,7 +158,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </Assign>
-          <TryCatch DisplayName="T/C - Add Transaction Item - next transaction" sap:VirtualizedContainerService.HintSize="586,341" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+          <TryCatch DisplayName="T/C - Add Transaction Item - next transaction" sap:VirtualizedContainerService.HintSize="504,952.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -158,29 +166,15 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <TryCatch.Try>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="02-Framework\AddNextTransactionItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="02-Framework\AddNextTransactionItem.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="02-Framework\AddNextTransactionItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="468.8,174.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="02-Framework\AddNextTransactionItem.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_processQueueFolder">
-                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="DirectCast(in_config(&quot;processQueueFolder&quot;),System.String)" />
-                  </InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_processQueueName">
-                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="DirectCast(in_config(&quot;processQueueName&quot;),System.String)" />
-                  </InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_queueItemReference">
-                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="queueItemReference" />
-                  </InArgument>
-                  <InArgument x:TypeArguments="x:Int32" x:Key="in_retryNumber">
-                    <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="io_retryNumber" />
-                  </InArgument>
-                  <InArgument x:TypeArguments="sd:DataRow" x:Key="in_rowTransaction">
-                    <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="rowTransaction" />
-                  </InArgument>
-                  <OutArgument x:TypeArguments="ui:QueueItem" x:Key="out_transactionItem">
-                    <VisualBasicReference x:TypeArguments="ui:QueueItem" ExpressionText="out_transactionItem" />
-                  </OutArgument>
-                  <InArgument x:TypeArguments="x:Int32" x:Key="in_timeoutOrchestratorInteractions">
-                    <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="Cint(in_config(&quot;timeoutOrchestratorInteractions&quot;))" />
-                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_processQueueFolder">[DirectCast(in_config("processQueueFolder"),System.String)]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_processQueueName">[DirectCast(in_config("processQueueName"),System.String)]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_queueItemReference">[queueItemReference]</InArgument>
+                  <InArgument x:TypeArguments="x:Int32" x:Key="in_retryNumber">[io_retryNumber]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataRow" x:Key="in_rowTransaction">[rowTransaction]</InArgument>
+                  <OutArgument x:TypeArguments="ui:QueueItem" x:Key="out_transactionItem">[out_transactionItem]</OutArgument>
+                  <InArgument x:TypeArguments="x:Int32" x:Key="in_timeoutOrchestratorInteractions">[Cint(in_config("timeoutOrchestratorInteractions"))]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </TryCatch.Try>
@@ -196,16 +190,16 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="ui:OrchestratorHttpException" Name="exception" />
                   </ActivityAction.Argument>
-                  <If Condition="[exception.Message.Contains(&quot;Duplicate&quot;)]" DisplayName="If Duplicate Reference" sap:VirtualizedContainerService.HintSize="334,182" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If Condition="[exception.Message.Contains(&quot;Duplicate&quot;)]" DisplayName="If Duplicate Reference" sap:VirtualizedContainerService.HintSize="468.8,492.8" sap2010:WorkflowViewState.IdRef="If_3">
                     <If.Then>
-                      <Sequence DisplayName="Duplicate Reference" sap:VirtualizedContainerService.HintSize="476,351" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <Sequence DisplayName="Duplicate Reference" sap:VirtualizedContainerService.HintSize="467.2,339.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="Log Message - duplicate reference" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[String.Format(&quot;Queue item with reference &quot;&quot;{0}&quot;&quot; already exists in the queue.&quot;, queueItemReference)]" />
-                        <Assign DisplayName="Assign isDuplicateReference" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_10">
+                        <ui:LogMessage DisplayName="Log Message - duplicate reference" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[String.Format(&quot;Queue item with reference &quot;&quot;{0}&quot;&quot; already exists in the queue.&quot;, queueItemReference)]" />
+                        <Assign DisplayName="Assign isDuplicateReference" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_10">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Boolean">[isDuplicateReference]</OutArgument>
                           </Assign.To>
@@ -216,21 +210,30 @@
                       </Sequence>
                     </If.Then>
                     <If.Else>
-                      <Rethrow DisplayName="Rethrow unexpected error" sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                      <Rethrow DisplayName="Rethrow unexpected error" sap:VirtualizedContainerService.HintSize="467.2,24.8" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
                     </If.Else>
                   </If>
                 </ActivityAction>
               </Catch>
             </TryCatch.Catches>
+            <TryCatch.Finally>
+              <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="468.8,89.6" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </TryCatch.Finally>
           </TryCatch>
-          <If sap2010:Annotation.AnnotationText="If this transaction already has a duplicate in the queue, check all the items with the same reference (different retry numbers). &#xA;&#xA;If at least one of them is found with status &quot;Success&quot;, &quot;In Progress&quot; or &quot;Abandoned&quot;, this transaction will not be processed again.&#xA;&#xA;If all the items are found with &quot;Failed&quot; status, this transaction will be processed one more time." Condition="[isDuplicateReference]" DisplayName="If QueueItem already exists in queue" sap:VirtualizedContainerService.HintSize="586,1882" sap2010:WorkflowViewState.IdRef="If_5">
+          <If sap2010:Annotation.AnnotationText="If this transaction already has a duplicate in the queue, check all the items with the same reference (different retry numbers). &#xA;&#xA;If at least one of them is found with status &quot;Success&quot;, &quot;In Progress&quot; or &quot;Abandoned&quot;, this transaction will not be processed again.&#xA;&#xA;If all the items are found with &quot;Failed&quot; status, this transaction will be processed one more time." Condition="[isDuplicateReference]" DisplayName="If QueueItem already exists in queue" sap:VirtualizedContainerService.HintSize="504,1928.8" sap2010:WorkflowViewState.IdRef="If_5">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence DisplayName="Actions in case of duplicate reference" sap:VirtualizedContainerService.HintSize="552,1583" sap2010:WorkflowViewState.IdRef="Sequence_11">
+              <Sequence DisplayName="Actions in case of duplicate reference" sap:VirtualizedContainerService.HintSize="502.4,1569.6" sap2010:WorkflowViewState.IdRef="Sequence_11">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="scg:IEnumerable(ui:QueueItem)" Name="successfulQueueItems" />
                   <Variable x:TypeArguments="x:Int32" Name="lastRetryNumber" />
@@ -240,14 +243,14 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:GetQueueItems Duration="{x:Null}" From="{x:Null}" Priority="{x:Null}" Skip="{x:Null}" To="{x:Null}" Top="{x:Null}" DisplayName="Get Success/In Progress/Abandoned Items" FilterStrategy="StartsWith" FolderPath="[in_config(&quot;processQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="510,143" sap2010:WorkflowViewState.IdRef="GetQueueItems_6" QueueItemStates="InProgress, Successful, Abandoned" QueueName="[in_config(&quot;processQueueName&quot;).ToString]" Reference="[queueItemReference + &quot; | &quot;]" Result="[successfulQueueItems]" TimeoutMS="[Cint(in_config(&quot;timeoutOrchestratorInteractions&quot;))]">
+                <ui:GetQueueItems Duration="{x:Null}" From="{x:Null}" Priority="{x:Null}" Skip="{x:Null}" To="{x:Null}" Top="{x:Null}" DisplayName="Get Success/In Progress/Abandoned Items" FilterStrategy="StartsWith" FolderPath="[in_config(&quot;processQueueFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="468.8,175.2" sap2010:WorkflowViewState.IdRef="GetQueueItems_6" QueueItemStates="InProgress, Successful, Abandoned" QueueName="[in_config(&quot;processQueueName&quot;).ToString]" Reference="[queueItemReference + &quot; | &quot;]" Result="[successfulQueueItems]" TimeoutMS="[Cint(in_config(&quot;timeoutOrchestratorInteractions&quot;))]">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:GetQueueItems>
-                <If Condition="[successfulQueueItems.Any()]" DisplayName="Any Success/In Prog/Abandoned?" sap:VirtualizedContainerService.HintSize="510,1312" sap2010:WorkflowViewState.IdRef="If_7">
+                <If Condition="[successfulQueueItems.Any()]" DisplayName="Any Success/In Prog/Abandoned?" sap:VirtualizedContainerService.HintSize="468.8,1334.4" sap2010:WorkflowViewState.IdRef="If_7">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -255,13 +258,13 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence DisplayName="Skip transaction" sap:VirtualizedContainerService.HintSize="476,473" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                    <Sequence DisplayName="Skip transaction" sap:VirtualizedContainerService.HintSize="467.2,452.8" sap2010:WorkflowViewState.IdRef="Sequence_15">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <Assign DisplayName="Assign output parameter as True" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_22">
+                      <Assign DisplayName="Assign output parameter as True" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_22">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:Boolean">[io_previouslyProcessed]</OutArgument>
                         </Assign.To>
@@ -274,7 +277,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </Assign>
-                      <Assign DisplayName="Set out_transactionItem as Nothing" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_21">
+                      <Assign DisplayName="Set out_transactionItem as Nothing" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_21">
                         <Assign.To>
                           <OutArgument x:TypeArguments="ui:QueueItem">[out_transactionItem]</OutArgument>
                         </Assign.To>
@@ -282,7 +285,7 @@
                           <InArgument x:TypeArguments="ui:QueueItem">[Nothing]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <ui:LogMessage DisplayName="Log Message - previously processed" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[String.Format(&quot;Transaction {0} was already processed successfuly&quot;, in_transactionNumber)]">
+                      <ui:LogMessage DisplayName="Log Message - previously processed" sap:VirtualizedContainerService.HintSize="433.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[String.Format(&quot;Transaction {0} was already processed successfuly&quot;, in_transactionNumber)]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -292,29 +295,19 @@
                     </Sequence>
                   </If.Then>
                   <If.Else>
-                    <Sequence DisplayName="Retry transaction once incrementing last retry number" sap:VirtualizedContainerService.HintSize="476,657" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                    <Sequence DisplayName="Retry transaction once incrementing last retry number" sap:VirtualizedContainerService.HintSize="467.2,752" sap2010:WorkflowViewState.IdRef="Sequence_17">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Get last retry number" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="02-Framework\GetTransactionLastRetry.xaml">
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Get last retry number" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="02-Framework\GetTransactionLastRetry.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_reference">
-                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="queueItemReference" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_queueName">
-                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_config(&quot;processQueueName&quot;).ToString" />
-                          </InArgument>
-                          <OutArgument x:TypeArguments="x:Int32" x:Key="out_lastRetryNumber">
-                            <VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="lastRetryNumber" />
-                          </OutArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_queueFolder">
-                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_config(&quot;processQueueFolder&quot;).ToString" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:Int32" x:Key="in_timeoutOrchestratorInteractions">
-                            <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="Cint(in_config(&quot;timeoutOrchestratorInteractions&quot;))" />
-                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_reference">[queueItemReference]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_queueName">[in_config("processQueueName").ToString]</InArgument>
+                          <OutArgument x:TypeArguments="x:Int32" x:Key="out_lastRetryNumber">[lastRetryNumber]</OutArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_queueFolder">[in_config("processQueueFolder").ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:Int32" x:Key="in_timeoutOrchestratorInteractions">[Cint(in_config("timeoutOrchestratorInteractions"))]</InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -322,7 +315,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:InvokeWorkflowFile>
-                      <Assign DisplayName="Update retry number" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_23">
+                      <Assign DisplayName="Update retry number" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_23">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:Int32">[io_retryNumber]</OutArgument>
                         </Assign.To>
@@ -335,36 +328,22 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </Assign>
-                      <ui:LogMessage DisplayName="Log Message - retry transaction" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[String.Format(&quot;Transaction {0} will be retried.&quot;, in_transactionNumber)]">
+                      <ui:LogMessage DisplayName="Log Message - retry transaction" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[String.Format(&quot;Transaction {0} will be retried.&quot;, in_transactionNumber)]">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:LogMessage>
-                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="02-Framework\AddNextTransactionItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="02-Framework\AddNextTransactionItem.xaml">
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="02-Framework\AddNextTransactionItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="433.6,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="02-Framework\AddNextTransactionItem.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_processQueueFolder">
-                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="DirectCast(in_config(&quot;processQueueFolder&quot;),System.String)" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_processQueueName">
-                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="DirectCast(in_config(&quot;processQueueName&quot;),System.String)" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_queueItemReference">
-                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="queueItemReference" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:Int32" x:Key="in_retryNumber">
-                            <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="io_retryNumber" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="sd:DataRow" x:Key="in_rowTransaction">
-                            <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="rowTransaction" />
-                          </InArgument>
-                          <OutArgument x:TypeArguments="ui:QueueItem" x:Key="out_transactionItem">
-                            <VisualBasicReference x:TypeArguments="ui:QueueItem" ExpressionText="out_transactionItem" />
-                          </OutArgument>
-                          <InArgument x:TypeArguments="x:Int32" x:Key="in_timeoutOrchestratorInteractions">
-                            <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="Cint(in_config(&quot;timeoutOrchestratorInteractions&quot;))" />
-                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_processQueueFolder">[DirectCast(in_config("processQueueFolder"),System.String)]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_processQueueName">[DirectCast(in_config("processQueueName"),System.String)]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_queueItemReference">[queueItemReference]</InArgument>
+                          <InArgument x:TypeArguments="x:Int32" x:Key="in_retryNumber">[io_retryNumber]</InArgument>
+                          <InArgument x:TypeArguments="sd:DataRow" x:Key="in_rowTransaction">[rowTransaction]</InArgument>
+                          <OutArgument x:TypeArguments="ui:QueueItem" x:Key="out_transactionItem">[out_transactionItem]</OutArgument>
+                          <InArgument x:TypeArguments="x:Int32" x:Key="in_timeoutOrchestratorInteractions">[Cint(in_config("timeoutOrchestratorInteractions"))]</InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                     </Sequence>
@@ -373,7 +352,7 @@
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_12">
+              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="502.4,89.6" sap2010:WorkflowViewState.IdRef="Sequence_12">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
