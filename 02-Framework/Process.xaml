@@ -94,18 +94,15 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1119.2,1656" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1119.2,1776" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="WorkItemUrl" />
       <Variable x:TypeArguments="x:String" Name="ClientId" />
       <Variable x:TypeArguments="x:String" Name="TaxId" />
       <Variable x:TypeArguments="x:String" Name="DownloadFolder" />
       <Variable x:TypeArguments="x:String" Name="mergedReportFilePath" />
-      <Variable x:TypeArguments="x:String" Name="year">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">2024</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="2024" Name="year" />
+      <Variable x:TypeArguments="x:String" Name="confirmationId" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -115,7 +112,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[in_transactionItem]" />
-    <Assign sap:VirtualizedContainerService.HintSize="433.6,112.8" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[ClientId]</OutArgument>
       </Assign.To>
@@ -123,7 +120,7 @@
         <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("TransactionId").ToString]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="433.6,112.8" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[WorkItemUrl]</OutArgument>
       </Assign.To>
@@ -181,9 +178,16 @@
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="MergeReportFiles - Invoke Workflow File (05-Workflows\MergeReportFiles.xaml)" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="05-Workflows\MergeReportFiles.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_downloadFolderPath">C:\Users\Colaborador\Documents\UiPath\GenerateYearlyReport-Iterativo\01-Data\Output\</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_MergedFolderPath">[mergedReportFilePath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_MergedFolderPath">C:\Users\Colaborador\Documents\UiPath\GenerateYearlyReport-Iterativo\01-Data\Output</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="433.6,79.2" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UploadYearlyReport - Invoke Workflow File (03-Applications\Edge\UploadYearlyReport.xaml)" sap:VirtualizedContainerService.HintSize="433.6,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="03-Applications\Edge\UploadYearlyReport.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_TaxId">[TaxId]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_year">[year]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_mergedReportPath" />
+        <OutArgument x:TypeArguments="x:String" x:Key="out_ConfirmationId">[confirmationId]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>
