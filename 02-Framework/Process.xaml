@@ -160,7 +160,7 @@
         <OutArgument x:TypeArguments="x:String">[DownloadFolder]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">C:\Users\Colaborador\Downloads</InArgument>
+        <InArgument x:TypeArguments="x:String">C:\Users\Colaborador\Downloads\</InArgument>
       </Assign.Value>
     </Assign>
     <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_3">
@@ -191,7 +191,7 @@
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_WorkFilePath">[in_Config("worksFolder").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_VendorTaxId">[TaxId]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_DownloadsFilePath">[in_Config("downloadFolder").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_DownloadsFilePath">[DownloadFolder]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
