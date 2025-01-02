@@ -94,7 +94,7 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1119.2,1712.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1119.2,1656" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="WorkItemUrl" />
       <Variable x:TypeArguments="x:String" Name="ClientId" />
@@ -163,30 +163,6 @@
         <InArgument x:TypeArguments="x:String">C:\Users\Colaborador\Downloads\</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_3">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,257.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="DownloadAllMonthlyReports - Copy (1) - Invoke Workflow File (03-Applications\Edge\DownloadAllMonthlyReports - Copy (1).xaml)" sap:VirtualizedContainerService.HintSize="416,197.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="03-Applications\Edge\DownloadAllMonthlyReports - Copy (1).xaml">
-            <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="in_WorkFilePath">C:\Users\Colaborador\Documents\UiPath\GenerateYearlyReport-Iterativo\01-Data\Output\Report</InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_VendorTaxId">[TaxId]</InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="in_DownloadsFilePath">[DownloadFolder]</InArgument>
-            </ui:InvokeWorkflowFile.Arguments>
-          </ui:InvokeWorkflowFile>
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="DownloadAllMonthlyReports - Invoke Workflow File (03-Applications\Edge\DownloadAllMonthlyReports.xaml)" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="03-Applications\Edge\DownloadAllMonthlyReports.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_WorkFilePath">[in_Config("worksFolder").ToString]</InArgument>
@@ -199,12 +175,13 @@
         <OutArgument x:TypeArguments="x:String">[mergedReportFilePath]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[string.Format("C:\Users\Colaborador\Documents\UiPath\GenerateYearlyReport-Iterativo\01-Data\Output\Yearly-Report-{0}-{1}.xlsx", year,TaxId)]</InArgument>
+        <InArgument x:TypeArguments="x:String">[string.Format("C:\Users\Colaborador\Documents\UiPath\GenerateYearlyReport-Iterativo\01-Data\Output\Yearly-Report-{0}-{1}.csv", year,TaxId)]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="MergeReportFiles - Invoke Workflow File (05-Workflows\MergeReportFiles.xaml)" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="05-Workflows\MergeReportFiles.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_downloadFolderPath">C:\Users\Colaborador\Documents\UiPath\GenerateYearlyReport-Iterativo\01-Data\Output\</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_MergedFolderPath">[mergedReportFilePath]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="433.6,79.2" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />

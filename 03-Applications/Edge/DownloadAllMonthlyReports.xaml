@@ -192,6 +192,7 @@
                               <InArgument x:TypeArguments="x:String" x:Key="in_DownloadsFilePath">[in_DownloadsFilePath]</InArgument>
                               <InArgument x:TypeArguments="x:String" x:Key="in_WorkFilePath">[in_WorkFilePath]</InArgument>
                               <InArgument x:TypeArguments="x:String" x:Key="in_Year">2024</InArgument>
+                              <OutArgument x:TypeArguments="x:String" x:Key="ou_workFilePath" />
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
                         </Sequence>

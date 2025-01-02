@@ -5,6 +5,7 @@
     <x:Property Name="in_DownloadsFilePath" Type="InArgument(x:String)" />
     <x:Property Name="in_WorkFilePath" Type="InArgument(x:String)" />
     <x:Property Name="in_Year" Type="InArgument(x:String)" />
+    <x:Property Name="ou_workFilePath" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -118,7 +119,7 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="DownloadMontlyReport" sap:VirtualizedContainerService.HintSize="1119.2,3549.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DownloadMontlyReport" sap:VirtualizedContainerService.HintSize="1119.2,3664" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="https://acme-test.uipath.com/reports/download" Name="DownloadMonthlyReportUrl" />
       <Variable x:TypeArguments="x:Boolean" Name="IsReportDownloaded" />
@@ -129,13 +130,13 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Edge: ACME System 1 - Download Monthly Report" sap:VirtualizedContainerService.HintSize="585.6,3526.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="344bffde-5874-470b-987b-d9eb3a57abfc" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Edge: ACME System 1 - Download Monthly Report" sap:VirtualizedContainerService.HintSize="585.6,3640.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="344bffde-5874-470b-987b-d9eb3a57abfc" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="552,3286.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="552,3400.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="reportFolderPath" />
             </Sequence.Variables>
@@ -266,7 +267,7 @@
                 </Sequence>
               </TryCatch.Finally>
             </TryCatch>
-            <If Condition="[IsReportDownloaded = True]" sap:VirtualizedContainerService.HintSize="518.4,1127.2" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[IsReportDownloaded = True]" sap:VirtualizedContainerService.HintSize="518.4,1134.4" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
                 <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,595.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <sap:WorkflowViewStateService.ViewState>
@@ -312,6 +313,11 @@
                 </Sequence>
               </If.Else>
             </If>
+            <Assign sap:VirtualizedContainerService.HintSize="518.4,107.2" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[ou_workFilePath]</OutArgument>
+              </Assign.To>
+            </Assign>
           </Sequence>
         </ActivityAction>
       </uix:NApplicationCard.Body>
