@@ -11,7 +11,7 @@
         "businessProcessName":"",
 		"applicationUrl":"https://acme-test.uipath.com/login",
 		"downloadFolder":"C:/Users/Colaborador/Downloads/",
-		"worksFolder":"C:/Users/Colaborador/Documents/UiPath/GenerateYearlyReport-Iterativo/01-Data/Output/",
+		"worksFolder":"C:/Users/Colaborador/Documents/UiPath/GenerateYearlyReport-Iterativo/01-Data/Output/CsvFiles",
         "assets":{
             "example1":{
                 "name":"ExampleAsset1",

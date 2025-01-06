@@ -275,7 +275,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[in_WorkFilePath]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="382.4,192" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[in_DownloadsFilePath+DownloadReport.Name]" />
-                  <ui:RenameFileX DisplayName="Rename File" FilePath="[in_WorkFilePath+ DownloadReport.Name]" sap:VirtualizedContainerService.HintSize="382.4,176" sap2010:WorkflowViewState.IdRef="RenameFileX_1" KeepExtension="True" NewName="[string.Format(&quot;Report-{0}-{1}-{2}&quot;,in_VendorTaxId,in_Month,in_Year)]" />
+                  <ui:RenameFileX DisplayName="Rename File" FilePath="[in_WorkFilePath+DownloadReport.Name]" sap:VirtualizedContainerService.HintSize="382.4,176" sap2010:WorkflowViewState.IdRef="RenameFileX_1" KeepExtension="True" NewName="[string.Format(&quot;Report-{0}-{1}-{2}&quot;,in_VendorTaxId,in_Month,in_Year)]" />
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,167.2" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[string.Format(&quot;Download of {0} Successfully Completed&quot;,in_Month)]" />
                 </Sequence>
               </If.Then>
