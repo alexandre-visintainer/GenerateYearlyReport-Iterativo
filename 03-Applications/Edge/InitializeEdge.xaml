@@ -111,7 +111,7 @@
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="InitializeEdge" sap:VirtualizedContainerService.HintSize="1119.2,3042.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="InitializeEdge" sap:VirtualizedContainerService.HintSize="1119.2,3144.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:BusinessRuleException" Name="businessExcept" />
     </Sequence.Variables>
@@ -120,10 +120,10 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:RetryScope sap2010:Annotation.AnnotationText="Scope to retry initialization attempt for an individual application in case of exceptions.&#xA;" DisplayName="Retry Scope - Init Application Edge" sap:VirtualizedContainerService.HintSize="529.6,2659.2" sap2010:WorkflowViewState.IdRef="RetryScope_9" NumberOfRetries="[in_maxRetryNumber]">
+    <ui:RetryScope sap2010:Annotation.AnnotationText="Scope to retry initialization attempt for an individual application in case of exceptions.&#xA;" DisplayName="Retry Scope - Init Application Edge" sap:VirtualizedContainerService.HintSize="510.4,2728.8" sap2010:WorkflowViewState.IdRef="RetryScope_9" NumberOfRetries="[in_maxRetryNumber]">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <TryCatch sap2010:Annotation.AnnotationText="If any exception occur during an attempt to initialize an application, take screenshot before closing it and rethrow exception to retry initialization (if limit has not been reached)" DisplayName="T/C - Init Application Edge" sap:VirtualizedContainerService.HintSize="468.8,2407.2" sap2010:WorkflowViewState.IdRef="TryCatch_9">
+          <TryCatch sap2010:Annotation.AnnotationText="If any exception occur during an attempt to initialize an application, take screenshot before closing it and rethrow exception to retry initialization (if limit has not been reached)" DisplayName="T/C - Init Application Edge" sap:VirtualizedContainerService.HintSize="468.8,2476.8" sap2010:WorkflowViewState.IdRef="TryCatch_9">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -266,7 +266,13 @@
               </Catch>
             </TryCatch.Catches>
             <TryCatch.Finally>
-              <Sequence DisplayName="Finally" sap2010:WorkflowViewState.IdRef="Sequence_31" />
+              <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="467.2,89.6" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
             </TryCatch.Finally>
           </TryCatch>
         </ActivityAction>
@@ -282,19 +288,19 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RetryScope>
-    <If Condition="[businessExcept IsNot Nothing]" DisplayName="Verify business except variable" sap:VirtualizedContainerService.HintSize="530,360" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[businessExcept IsNot Nothing]" DisplayName="Verify business except variable" sap:VirtualizedContainerService.HintSize="510.4,392.8" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="376,178" sap2010:WorkflowViewState.IdRef="Sequence_28">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,173.6" sap2010:WorkflowViewState.IdRef="Sequence_28">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Throw DisplayName="Throw - businessExcept" Exception="[businessExcept]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
+          <Throw DisplayName="Throw - businessExcept" Exception="[businessExcept]" sap:VirtualizedContainerService.HintSize="382.4,113.6" sap2010:WorkflowViewState.IdRef="Throw_1" />
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="300,81.33333333333333" sap2010:WorkflowViewState.IdRef="Sequence_29">
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_29">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
